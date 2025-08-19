@@ -9,7 +9,7 @@ AI Health Diary, kullanıcıların sağlık durumlarını takip etmelerine ve ya
 - FastAPI tabanlı backend.
 
 ## Kurulum
-1. Python 3.12 yüklü olduğundan emin olun.
+1. Python 3.11 veya üstü yüklü olduğundan emin olun.
 2. Aşağıdaki adımları izleyin:
 
 ```bash
@@ -24,11 +24,11 @@ pip install -r requirements.txt
 
 ```
 ÖRNEK KULLANIM:
-GOOGLE_API_KEY=hıbewfıwjfefsgf25snwehr
+GOOGLE_API_KEY="hıbewfıwjfefsgf25snwehr"
 ```
 
 4. Uygulamayı başlatın:
 
 ```bash
-uvicorn ai-health-diary.main:app --reload
+uvicorn main:app --reload
 ```

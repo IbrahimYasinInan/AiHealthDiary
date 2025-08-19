@@ -19,8 +19,8 @@ from bs4 import BeautifulSoup
 templates = Jinja2Templates(directory="templates")
 
 router = APIRouter(
-    prefix='/todos',
-    tags=['todos']
+    prefix='/todo',
+    tags=['todo']
 )
 
 
@@ -123,7 +123,7 @@ async def create_todo(user: user_dependency, db: db_dependency,
                       todo_request: TodoRequest):
     if user is None:
         raise HTTPException(status_code=401, detail='Authentication Failed')
-    todo_model = Todos(**todo_request.model_dump(), owner_id=user.get('id'))
+    todo_model = Todos(**todo_request.dict(), owner_id=user.get("id"))
     todo_model.description = create_todo_with_gemini(todo_model.description)
     db.add(todo_model)
     db.commit()
@@ -165,9 +165,7 @@ async def delete_todo(user: user_dependency, db: db_dependency, todo_id: int = P
 
 
 def markdown_to_text(markdown_string):
-    # Convert markdown to HTML
     html = markdown.markdown(markdown_string)
-    # Parse the HTML and extract the text
     soup = BeautifulSoup(html, "html.parser")
     text = soup.get_text()
     return text
@@ -176,7 +174,7 @@ def markdown_to_text(markdown_string):
 def create_todo_with_gemini(todo_string: str):
     load_dotenv()
     genai.configure(api_key=os.environ.get("GOOGLE_API_KEY"))
-    llm = ChatGoogleGenerativeAI(model="gemini-pro")
+    llm = ChatGoogleGenerativeAI(model="gemini-2.5-pro")
     response = llm.invoke(
         [
             HumanMessage(content="I will provide you with a short note about my health or mood today. What I want you to do is generate a longer, reflective, and empathetic diary entry that elaborates on my condition and provides context, including possible causes or suggestions for improvement, my next message will be my todo:"),

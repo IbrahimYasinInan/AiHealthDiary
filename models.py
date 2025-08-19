@@ -2,17 +2,17 @@ from database import Base
 from sqlalchemy import column, Integer, String, Boolean, Column, ForeignKey
 
 
-class Todo(Base):
+class Todos(Base):
     __tablename__ = 'todos'
 
     id = Column(Integer, primary_key=True, index=True)
     title = Column(String)
-    suggestion = Column(String)
+    description = Column(String)
     priority = Column(Integer)
     complete = Column(Boolean, default=False)
     owner_id = Column(Integer, ForeignKey('users.id'))
 
-class User(Base):
+class Users(Base):
     __tablename__ = 'users'
 
     id = Column(Integer, primary_key=True, index=True)
