@@ -24,7 +24,7 @@ pip install -r requirements.txt
 
 ```
 ÖRNEK KULLANIM:
-api_key=RED6bedt32j3y4he 
+GOOGLE_API_KEY=hıbewfıwjfefsgf25snwehr
 ```
 
 4. Uygulamayı başlatın:
